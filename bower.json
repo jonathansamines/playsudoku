@@ -1,0 +1,7 @@
+{
+  "name": "Play Sudoku",
+  "version": 1,
+  "dependencies": {
+    "normalize.css": "~3.0.1"
+  }
+}
