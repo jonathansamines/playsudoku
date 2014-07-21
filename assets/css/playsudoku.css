@@ -37,11 +37,11 @@ main#gameholder{
 		background-color : #fafafa;
 		box-sizing : border-box;
 		display : inline-block;
-		height : 50px;
-		margin : 2px 1px;
+		height : 51px;
+		margin : 2px 2px;
 		text-align : center;
 		vertical-align : middle;
-		width : 50px;
+		width : 51px;
 	}
 	.gameboard .row:nth-child(1) .column{ border-top : 1px solid #eee; }
 	.gameboard .row:last-child .column,
@@ -65,4 +65,7 @@ main#gameholder{
 		font-size : 2rem;
 		outline : none;
 		text-align: center;
+	}
+	.gameboard .row .column input.invalid{
+		color : #BF2716;
 	}
