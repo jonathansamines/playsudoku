@@ -114,20 +114,12 @@ TableroSudoku.prototype.verificarPosicionValida = function(valor, x, y){
 
 	// se verifica que no haya ningun elemento en la posicion absoluta
 	if(this.mapaCoordenadas[x][y] !== undefined){
-<<<<<<< HEAD
-=======
-		console.log('valor ya establecido.');
->>>>>>> master
 		return false;
 	}
 
 	// se busca en toda la fila correspondiente a la coordenada X
 	for(var coordX = 0; coordX <= this.limiteMayor - 1; coordX++){
 		if(valor == this.mapaCoordenadas[coordX][y]){
-<<<<<<< HEAD
-=======
-			console.log('valor encontrado en %s - $s', coordX, y);
->>>>>>> master
 			return false;
 		}
 	}
@@ -135,10 +127,6 @@ TableroSudoku.prototype.verificarPosicionValida = function(valor, x, y){
 	// se busca en toda la columna correspondiente a la coordenada X
 	for(var coordY = 0; coordY <= this.limiteMayor - 1; coordY++){
 		if(valor == this.mapaCoordenadas[x][coordY]){
-<<<<<<< HEAD
-=======
-			console.log('valor encontrado en %s - %s', x, coordY);
->>>>>>> master
 			return false;
 		}
 	}
@@ -149,10 +137,6 @@ TableroSudoku.prototype.verificarPosicionValida = function(valor, x, y){
 
 		for(var intY = intervaloGrupo.y; intY <= intervaloGrupo.y + this.limiteGrupo - 1; intY++){
 			if(valor == this.mapaCoordenadas[intX][intY]){
-<<<<<<< HEAD
-=======
-				console.log('valor encontrado en el intervalo %s - %s', intX, intY);
->>>>>>> master
 				return false;
 			}
 		}
@@ -193,27 +177,11 @@ TableroSudoku.prototype.crearItem = function(x, y, valor, estado){
 TableroSudoku.prototype.validarNumerosIngresados = function(){
 	var that = this;
 	this.tablero.addEventListener('keydown', function(event){
-<<<<<<< HEAD
-		var items = this.getElementsByClassName('column');
-
-=======
->>>>>>> master
 		// se verifica que el elemento que lanzó el evento
 		// sea un item del sudoku
 		if(event.target instanceof HTMLInputElement){
 			var valor = Number(String.fromCharCode(event.keyCode));
-<<<<<<< HEAD
 
-			if(!Number.isNaN(valor)){
-				// coordenadas
-				var coordenadas = event.target.parentNode.getAttribute('data-coordinates').split('-');
-
-				if( that.verificarPosicionValida(valor, coordenadas[0], coordenadas[1])){
-					event.target.setAttribute('class', 'column');
-					that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = valor;
-				}else{
-					event.target.setAttribute('class', 'column invalid');
-=======
 			// coordenadas
 			var coordenadas = event.target.parentNode.getAttribute('data-coordinates').split('-');
 				
@@ -225,18 +193,14 @@ TableroSudoku.prototype.validarNumerosIngresados = function(){
 				}else{
 					that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
 					event.target.setAttribute('class', 'invalid');
->>>>>>> master
 				}
 			
 			// permite backspace, pero ningun caracter alfabetico
 			}else if(event.keyCode !== 8){
 				event.preventDefault();
-<<<<<<< HEAD
-=======
 				that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
 			}else{
 				that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
->>>>>>> master
 			}
 		}
 	});
