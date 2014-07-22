@@ -5,8 +5,8 @@
  */
 
 html, body{
-	background-color : #f6f6f6;
-	color : #444;
+	background-color : #FAFAFA;
+	color : #555;
 }
 
 header{}
@@ -15,7 +15,7 @@ header{}
 		font-size : 2.5rem;
 	}
 	header h1 a{
-		color : #555;
+		color : #1863A0;
 		text-decoration: none;
 	}
 
@@ -23,9 +23,8 @@ main#gameholder{
 	margin : 0 auto;
 }
 
+/* Estilos para gameboard de sudoku */
 .gameboard{
-	background-color : #fff;
-	border : 1px solid #eee;
 	height : 500px;
 	margin : 0 auto;
 	padding : 10px;
@@ -34,24 +33,38 @@ main#gameholder{
 	.gameboard .row{ margin : 0;}
 	
 	.gameboard .row .column{
-		background-color : #fafafa;
+		background-color : #fff;
+		border-color : #eee;
+		border-style : solid;
+		border-width: 1px;
+
 		box-sizing : border-box;
 		display : inline-block;
+
 		height : 51px;
-		margin : 2px 2px;
+		margin : 1px;
+		
 		text-align : center;
 		vertical-align : middle;
 		width : 51px;
 	}
-	.gameboard .row:nth-child(1) .column{ border-top : 1px solid #eee; }
-	.gameboard .row:last-child .column,
-	.gameboard .row:nth-child(3) .column,
-	.gameboard .row:nth-child(6) .column{ border-bottom : 1px solid #eee; }
 
-	.gameboard .row .column:nth-child(1){ border-left : 1px solid #eee;}
-	.gameboard .row .column:nth-child(3),
-	.gameboard .row .column:nth-child(6),
-	.gameboard .row .column:last-child { border-right : 1px solid #eee; }
+		/* Estilos para grupos de columnas */
+		.gameboard .row:nth-child(1) .column,
+		.gameboard .row:nth-child(4) .column,
+		.gameboard .row:nth-child(7) .column{ margin-top : 4px; }
+		
+		.gameboard .row:nth-child(3) .column,
+		.gameboard .row:nth-child(6) .column,
+		.gameboard .row:nth-child(9) .column{ margin-bottom : 4px; }
+
+		.gameboard .row .column:nth-child(1),
+		.gameboard .row .column:nth-child(4),
+		.gameboard .row .column:nth-child(7){ margin-left : 4px; }
+		
+		.gameboard .row .column:nth-child(3),
+		.gameboard .row .column:nth-child(6),
+		.gameboard .row .column:nth-child(9){ margin-right : 4px; }
 
 	.gameboard .row .column input{
 		margin : 0;
@@ -66,6 +79,12 @@ main#gameholder{
 		outline : none;
 		text-align: center;
 	}
+	.gameboard .row .column input[disabled]{
+		background-color : #FFFBDD;
+	}
 	.gameboard .row .column input.invalid{
-		color : #BF2716;
+		background-color : #FCDBC9;
+	}
+	.gameboard .row .column input.valid{
+		background-color : #D0E5B7;
 	}
