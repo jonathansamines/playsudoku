@@ -114,14 +114,12 @@ TableroSudoku.prototype.verificarPosicionValida = function(valor, x, y){
 
 	// se verifica que no haya ningun elemento en la posicion absoluta
 	if(this.mapaCoordenadas[x][y] !== undefined){
-		console.log('valor ya establecido.');
 		return false;
 	}
 
 	// se busca en toda la fila correspondiente a la coordenada X
 	for(var coordX = 0; coordX <= this.limiteMayor - 1; coordX++){
 		if(valor == this.mapaCoordenadas[coordX][y]){
-			console.log('valor encontrado en %s - $s', coordX, y);
 			return false;
 		}
 	}
@@ -129,7 +127,6 @@ TableroSudoku.prototype.verificarPosicionValida = function(valor, x, y){
 	// se busca en toda la columna correspondiente a la coordenada X
 	for(var coordY = 0; coordY <= this.limiteMayor - 1; coordY++){
 		if(valor == this.mapaCoordenadas[x][coordY]){
-			console.log('valor encontrado en %s - %s', x, coordY);
 			return false;
 		}
 	}
@@ -140,7 +137,6 @@ TableroSudoku.prototype.verificarPosicionValida = function(valor, x, y){
 
 		for(var intY = intervaloGrupo.y; intY <= intervaloGrupo.y + this.limiteGrupo - 1; intY++){
 			if(valor == this.mapaCoordenadas[intX][intY]){
-				console.log('valor encontrado en el intervalo %s - %s', intX, intY);
 				return false;
 			}
 		}
@@ -191,7 +187,7 @@ TableroSudoku.prototype.validarNumerosIngresados = function(){
 			if(/^[1-9]$/.test(valor)){
 				
 				if( that.verificarPosicionValida(valor, coordenadas[0], coordenadas[1])){
-					event.target.setAttribute('class', '');
+					event.target.setAttribute('class', 'valid');
 					that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = valor;
 				}else{
 					that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
@@ -203,6 +199,7 @@ TableroSudoku.prototype.validarNumerosIngresados = function(){
 				event.preventDefault();
 				that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
 			}else{
+				event.target.setAttribute('class', '');
 				that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
 			}
 		}
