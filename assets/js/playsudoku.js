@@ -63,6 +63,8 @@ TableroSudoku.prototype.generarMapaPosicionesAleatorias = function(cantidad){
 	while(indice < cantidad){
 		var posicion = this.generarPosicionAleatoria(),
 			valor = this.generarNumeroAleatorio(this.limiteMenor, this.limiteMayor);
+
+		console.log('posicion aleatoria : %s, %s', posicion.x, posicion.y);
 		var valido = this.verificarPosicionValida(valor, posicion.x, posicion.y);
 
 		if(valido){ 
@@ -145,6 +147,20 @@ TableroSudoku.prototype.verificarPosicionValida = function(valor, x, y){
 	return true;
 };
 
+TableroSudoku.prototype.verificarEstadoJuego = function(){
+	var estadoJuego = false;
+	
+	// se verifica cada posicion del juego, en caso de que exista
+	// algun item disponible para ingresar
+	for(var coordX = 0; coordX <= this.limiteMayor - 1; coordX++){
+		for(var coordY = 0; coordY <= this.limiteMayor - 1; coordY++){
+			estadoJuego = this.verificarPosicionValida(this.mapaCoordenadas[coordX][coordY], coordX, coordY);
+		}
+	}
+
+	return estadoJuego;
+};
+
 TableroSudoku.prototype.crearTablero = function(){
 	var tablero = document.createElement('section');
 	tablero.setAttribute('class', 'gameboard');
@@ -198,6 +214,10 @@ TableroSudoku.prototype.validarNumerosIngresados = function(){
 				if( that.verificarPosicionValida(valor, coordenadas[0], coordenadas[1])){
 					event.target.setAttribute('class', 'valid');
 					that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = valor;
+
+					if( that.verificarEstadoJuego() ){
+						console.log('Juego finalizado.');
+					}
 				}else{
 					that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
 					event.target.setAttribute('class', 'invalid');
@@ -243,6 +263,6 @@ var tablero = new TableroSudoku({
 	holderId : 'gameholder'
 });
 
-tablero.generarMapaPosicionesAleatorias(10);
+tablero.generarMapaPosicionesAleatorias(60);
 tablero.dibujarTablero();
 tablero.validarNumerosIngresados();
