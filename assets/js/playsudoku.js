@@ -263,6 +263,6 @@ var tablero = new TableroSudoku({
 	holderId : 'gameholder'
 });
 
-tablero.generarMapaPosicionesAleatorias(60);
+tablero.generarMapaPosicionesAleatorias(20);
 tablero.dibujarTablero();
 tablero.validarNumerosIngresados();
