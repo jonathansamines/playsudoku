@@ -74,9 +74,9 @@ TableroSudoku.prototype.generarMapaPosicionesAleatorias = function(cantidad){
 
 /**
  * Obtiene el intervalor de coordenadas absolutas para un grupo.
- * @param  {[type]} x [description]
- * @param  {[type]} y [description]
- * @return {[type]}   [description]
+ * @param  {Number} x Inicio del intervalo en x
+ * @param  {Number} y Inicio del intervalo en y
+ * @return {Object}   Coordenadas de inicio de los intervalos en x,y
  */
 TableroSudoku.prototype.obtenerIntervaloGrupo = function(x, y){
 	return {
@@ -176,16 +176,25 @@ TableroSudoku.prototype.crearItem = function(x, y, valor, estado){
 
 TableroSudoku.prototype.validarNumerosIngresados = function(){
 	var that = this;
+
 	this.tablero.addEventListener('keydown', function(event){
 		// se verifica que el elemento que lanzó el evento
 		// sea un item del sudoku
 		if(event.target instanceof HTMLInputElement){
 			var valor = Number(String.fromCharCode(event.keyCode));
+
 			// coordenadas
 			var coordenadas = event.target.parentNode.getAttribute('data-coordinates').split('-');
-				
+			
 			if(/^[1-9]$/.test(valor)){
-				
+
+				// solo se permiten numeros de un digito, el "value" del input
+				// siempre va un valor atrasado al real, por lo cual se compara con >= 1
+				if(event.target.value.toString().length >= 1){
+					event.preventDefault();
+					return;
+				}
+
 				if( that.verificarPosicionValida(valor, coordenadas[0], coordenadas[1])){
 					event.target.setAttribute('class', 'valid');
 					that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = valor;
@@ -194,12 +203,14 @@ TableroSudoku.prototype.validarNumerosIngresados = function(){
 					event.target.setAttribute('class', 'invalid');
 				}
 			
-			// permite backspace, pero ningun caracter alfabetico
-			}else if(event.keyCode !== 8){
-				event.preventDefault();
-				that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
-			}else{
+			// permite backspace
+			}else if(event.keyCode === 8){
 				event.target.setAttribute('class', '');
+				that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
+
+			// se cancelan los keycodes para caracteres alfabeticos, excepto tabulaciones
+			}else if(event.keyCode !== 9 && event.keyCode !== 229){
+				event.preventDefault();
 				that.mapaCoordenadas[ coordenadas[0] ][ coordenadas[1] ] = undefined;
 			}
 		}
@@ -207,7 +218,6 @@ TableroSudoku.prototype.validarNumerosIngresados = function(){
 };
 
 TableroSudoku.prototype.dibujarTablero = function(){
-	console.log(this.mapaCoordenadas);
 	for(var x = 0; x <= this.limiteMayor - 1; x++){
 		var fila = this.crearFila();
 
